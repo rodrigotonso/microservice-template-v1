@@ -1,0 +1,593 @@
+openapi: 3.0.0
+info:
+  title: Service
+  version: ..
+  description: A description for the sample API done with [Swagger](https://swagger.io).
+  termsOfService: https://opensource.org/licenses/MIT
+  contact:
+    name: Not specified.
+  license:
+    name: License
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: '/test_container/'
+    description: Not specified.
+    variables:
+      someVariable:
+        default: defaultValue
+        description: Some variable here...
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+paths:
+  '${API.MONGO.ALL_SAMPLES}':
+    get:
+      tags:
+        - Mongo Sample
+      operationId: getSamples
+      summary: Get all the samples.
+      description: Returns an array with all the samples.
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/SampleWithId'
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+    delete:
+      tags:
+        - Mongo Sample
+      operationId: emptysamples
+      summary: Deletes all Samples.
+      description: Deletes all samples and return true or false.
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: boolean
+                        enum: [true, false]
+                        example: true
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.MONGO.COUNT}':
+    get:
+      tags:
+        - Mongo Sample
+      operationId: countSample
+      summary: Count how many samples are there.
+      description: Returns the samples count.
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: number
+                        example: 15
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.MONGO.COUNT_OTHER_INFO}':
+    get:
+      tags:
+        - Mongo Sample
+      operationId: countSampleOtherInfo
+      summary: Count how many other info entries the samples have.
+      description: Returns the samples other info count.
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: number
+                        example: 15
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.MONGO.SAMPLE}':
+    post:
+      tags:
+        - Mongo Sample
+      operationId: addSample
+      summary: Adds a sample.
+      description: Returns the new sample info.
+      requestBody:
+        description: The sample that will be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sample'
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/SampleWithId'
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.MONGO.DELETE_ONE}':
+    delete:
+      tags:
+        - Mongo Sample
+      operationId: deleteSample
+      summary: Deletes a sample.
+      description: Returns if the sample could be deleted.
+      parameters:
+        - in: path
+          description: The sample name.
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: boolean
+                        enum: [true, false]
+                        example: true
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.SEQUELIZE.ALL_SAMPLES}':
+    get:
+      tags:
+        - Sequelize Sample
+      operationId: getSamples2
+      summary: Get all the samples.
+      description: Returns an array with all the samples.
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/SampleWithId'
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+    delete:
+      tags:
+        - Sequelize Sample
+      operationId: emptysamples2
+      summary: Deletes all Samples.
+      description: Deletes all samples and return true or false.
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: boolean
+                        enum: [true, false]
+                        example: true
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.SEQUELIZE.COUNT}':
+    get:
+      tags:
+        - Sequelize Sample
+      operationId: countSample2
+      summary: Count how many samples are there.
+      description: Returns the samples count.
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: number
+                        example: 15
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.SEQUELIZE.COUNT_OTHER_INFO}':
+    get:
+      tags:
+        - Sequelize Sample
+      operationId: countSampleOtherInfo2
+      summary: Count how many other info entries the samples have.
+      description: Returns the samples other info count.
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: number
+                        example: 15
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.SEQUELIZE.SAMPLE}':
+    post:
+      tags:
+        - Sequelize Sample
+      operationId: addSample2
+      summary: Adds a sample.
+      description: Returns the new sample info.
+      requestBody:
+        description: The sample that will be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sample'
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/SampleWithId'
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+  '${API.SEQUELIZE.DELETE_ONE}':
+    delete:
+      tags:
+        - Sequelize Sample
+      operationId: deleteSample2
+      summary: Deletes a sample.
+      description: Returns if the sample could be deleted.
+      parameters:
+        - in: path
+          description: The sample name.
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request succeeded.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseSuccess'
+                  - type: object
+                    properties:
+                      payload:
+                        type: boolean
+                        enum: [true, false]
+                        example: true
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '429':
+          $ref: '#/components/responses/Generic429'
+        '500':
+          $ref: '#/components/responses/Generic500'
+components:
+  responses:
+    Generic400:
+      description: Invalid arguments sent to this method.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR_CODES.API_INVALID_PARAMS}
+                    enum: ['${ERROR_CODES.API_INVALID_PARAMS}', '${ERROR_CODES.INVALID_PARAMS}']
+    Generic401:
+      description: The user is not authorized.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR_CODES.NOT_AUTHORIZED}
+                    enum: ['${ERROR_CODES.NOT_AUTHORIZED}']
+                required:
+                  - errorCode
+    Generic403:
+      description: Method not authorized for this user.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR_CODES.NOT_AUTHORIZED}
+                    enum: ['${ERROR_CODES.NOT_AUTHORIZED}']
+    Generic404:
+      description: The method is not found.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR_CODES.API_METHOD_NOT_FOUND}
+                    enum: ['${ERROR_CODES.METHOD_NOT_FOUND}', '${ERROR_CODES.API_METHOD_NOT_FOUND}']
+    Generic429:
+      description: The client is sending requests too often.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR_CODES.API_REQUESTS_TOO_OFTEN}
+                    enum: ['${ERROR_CODES.API_REQUESTS_TOO_OFTEN}']
+    Generic500:
+      description: The server had an unexpected error.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR_CODES.NOT_DEFINED}
+                    enum: ['${ERROR_CODES.NOT_DEFINED}']
+  schemas:
+    ResponseSuccess:
+      properties:
+        success:
+          type: boolean
+          description: The API succedeed.
+          enum: [true]
+          example: true
+        payload:
+          description: The API result.
+      required:
+        - success
+        - payload
+    GenericError:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: The API failed.
+          enum: [false]
+          example: false
+        errorCode:
+          description: Some description code.
+          example: ERROR_CODE
+        error:
+          example: Some useful description about the error.
+          description: Message explaining what happened.
+      required:
+        - success
+        - error
+        - errorCode
+    Sample:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Some name.
+        age:
+          type: number
+          example: 25
+        someText:
+          type: string
+          example: Some text here...
+      required:
+        - name
+        - age
+        - someText
+    SampleWithId:
+      allOf:
+        - $ref: '#/components/schemas/Sample'
+        - type: object
+          properties:
+            id:
+              example: string or number
+              oneOf:
+                - type: number
+                - type: string
+          required:
+            - id
+    Samples:
+      type: array
+      items:
+        '$ref': '#/components/schemas/SampleWithId'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+tags:
+  - name: Mongo Sample
+    description: Mongo Sample description.
+    externalDocs:
+      description: More about the sample.
+      url: https://swagger.io
+  - name: Sequelize Sample
+    description: Sequelize Sample description.
+    externalDocs:
+      description: More about the sample.
+      url: https://swagger.io
+security:
+  - ApiKeyAuth: []

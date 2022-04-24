@@ -1,0 +1,11 @@
+# Random data.
+type Numbers {
+  results: [Int];
+}
+
+# Just some sample query.
+type Query {
+  hello($name: String): String
+  bye($name: String): String
+  randomNumbers($count: Int!): Numbers
+}

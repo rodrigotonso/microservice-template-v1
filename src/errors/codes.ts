@@ -1,0 +1,27 @@
+/**
+ * @packageDocumentation
+ * @hidden
+ * @ignore
+ * Contains al the different codes for errors.
+ */
+
+/**
+ *  Different code errors.
+ */
+const ERROR_CODES = {
+  NOT_DEFINED: 'NOT_DEFINED',
+  INVALID_PARAMS: 'INVALID_PARAMS',
+  NOT_AUTHORIZED: 'NOT_AUTHORIZED',
+
+  // API ERRORS.
+  API_ONLY_HTTPS: 'API_ONLY_HTTPS',
+  API_METHOD_NOT_FOUND: 'API_METHOD_NOT_FOUND',
+  API_REQUESTS_TOO_OFTEN: 'API_REQUESTS_TOO_OFTEN',
+  API_INVALID_PARAMS: 'API_INVALID_PARAMS',
+
+  // SERVICES
+  OTHER_SERVICE_INVALID_RESPONSE: 'OTHER_SERVICE_INVALID_RESPONSE',
+  OTHER_SERVICE_ERROR: 'OTHER_SERVICE_ERROR',
+} as const;
+
+export default ERROR_CODES;

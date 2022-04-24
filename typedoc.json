@@ -1,0 +1,12 @@
+{
+  "exclude": "src/!*.ts",
+  "excludeExternals": true,
+  "excludeNotExported": false,
+  "excludePrivate": true,
+  "hideGenerator": true,
+  "includeDeclarations": true,
+  "inputFiles": ["./src"],
+  "mode": "modules",
+  "out": "docs/code",
+  "plugin": ["typedoc-plugin-external-module-name"]
+}

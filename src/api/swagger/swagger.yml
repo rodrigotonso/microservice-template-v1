@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Service
+  version: ..
+  description: A description for the sample API done with [Swagger](https://swagger.io).
+  termsOfService: https://opensource.org/licenses/MIT
+  contact:
+    name: Not specified.
+  license:
+    name: License
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: '/test_container/'
+    description: Not specified.
+    variables:
+      someVariable:
+        default: defaultValue
+        description: Some variable here...
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+components:
+  responses:
+    Generic400:
+      description: Invalid arguments sent to this method.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR.API_INVALID_PARAMS}
+                    enum:
+                      ['Holi', '${ERROR_CODES.API_INVALID_PARAMS}', '${ERROR_CODES.INVALID_PARAMS}']
+    Generic401:
+      description: The user is not authorized.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR.NOT_AUTHORIZED}
+                    enum: ['${ERROR.NOT_AUTHORIZED}']
+                required:
+                  - errorCode
+    Generic403:
+      description: Method not authorized for this user.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR.NOT_AUTHORIZED}
+                    enum: ['${ERROR.NOT_AUTHORIZED}']
+    Generic404:
+      description: The method is not found.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR.METHOD_NOT_FOUND}
+                    enum: ['${ERROR.METHOD_NOT_FOUND}', '${ERROR.API_METHOD_NOT_FOUND}']
+    Generic429:
+      description: The client is sending requests too often.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR.API_REQUESTS_TOO_OFTEN}
+                    enum: ['${ERROR.API_REQUESTS_TOO_OFTEN}']
+    Generic500:
+      description: The server had an unexpected error.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/GenericError'
+              - type: object
+                properties:
+                  errorCode:
+                    example: ${ERROR.NOT_DEFINED}
+                    enum: ['${ERROR.NOT_DEFINED}']
+  schemas:
+    ResponseSuccess:
+      properties:
+        success:
+          type: boolean
+          description: The API succedeed.
+          enum: [true]
+          example: true
+        payload:
+          description: The API result.
+      required:
+        - success
+        - payload
+    GenericError:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: The API failed.
+          enum: [false]
+          example: false
+        errorCode:
+          description: Some description code.
+          example: ERROR_CODE
+        error:
+          example: Some useful description about the error.
+          description: Message explaining what happened.
+      required:
+        - success
+        - error
+        - errorCode
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+tags:
+security:
+  - ApiKeyAuth: []

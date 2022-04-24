@@ -1,0 +1,23 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
+  "testEnvironment": "node",
+  "testRegex": "/.*\\.test\\.(jsx?|tsx?)$",
+  "moduleDirectories": ["node_modules", "~"],
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "moduleNameMapper": {
+    "~(.*)$": "<rootDir>/src/$1"
+  },
+  "reporters": [
+    "default",
+    [
+      "./node_modules/jest-html-reporter",
+      {
+        "pageTitle": "Test Report"
+      }
+    ]
+  ],
+  "setupFiles": ["./package_utils/prepareTests.js", "dotenv/config"],
+  "verbose": true
+}
