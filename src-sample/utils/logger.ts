@@ -139,8 +139,6 @@ const CONSOLE_METHOD = LABELS.CONSOLE;
 console.log = (...args: unknown[]) => logs.info('Console.log', CONSOLE_METHOD, { args });
 console.error = (...args: unknown[]) => logs.error('Console.error', CONSOLE_METHOD, { args });
 console.debug = (...args: unknown[]) => logs.debug('Console.debug', CONSOLE_METHOD, { args });
-console.exception = (...args: unknown[]) =>
-  logs.error('Console.exception', CONSOLE_METHOD, { args });
 console.info = (...args: unknown[]) => logs.info('Console.info', CONSOLE_METHOD, { args });
 console.table = (...args: unknown[]) => logs.info('Console.table', CONSOLE_METHOD, { args });
 console.warn = (...args: unknown[]) => logs.warn('Console.warn', CONSOLE_METHOD, { args });
